@@ -11,6 +11,7 @@ def decision(x,w,peso):
 
     for i in range(len(x)):
         resultado = resultado + x[i]*w[i]
+
     resultado = resultado + peso
     funcion = 1/(1+math.exp(-resultado))
 
@@ -57,83 +58,76 @@ def main():
     
     
 def forward(a,b,c,d):
-    
+
     x = [a,b,c,d]
-#--------------------------------
     #Primer nodo
     w = [-2,-2,-2,-2]
     b = 1
     primerNodo = decision(x,w,b)
-    #print("T1 " + str(primerNodo))
 
     #Segundo nodo
     w = [-2,-6,2,-6]
     b = 3
     segundoNodo = decision(x,w,b)
-    #print("T2 " + str(segundoNodo))
 
     # Tercer nodo
     w = [-4, -1, -4, 3]
     b = -1
     tercerNodo = decision(x, w, b)
-    #print("T3 " + str(tercerNodo))
 
     # Cuarto nodo
     w = [-6, -1, 5, 5]
     b = -6
-    #print("Es este")
     cuartoNodo = decision(x, w, b)
-    #print("T4 " + str(cuartoNodo))
 
     # Quinto nodo
     w = [-6, 3, -6, 3]
     b = -4
     quintoNodo = decision(x, w, b)
-    #print("T5 " + str(quintoNodo))
 
     #Or
     x=[primerNodo,segundoNodo,tercerNodo,cuartoNodo,quintoNodo]
     w = [2, 2, 2, 2, 2]
     b = -2
-    return 0.5 < decision(x, w, b)
+    return decision(x, w, b)
 
 def prueba():
     global X
     global Y
-    X.append(forward(0, 0, 0, 0))
+    X.append(forward(0, 0, 0, 0)>0.5)
     Y.append((0, 0, 0, 0))
-    X.append(forward(0, 0, 0, 1))
+    X.append(forward(0, 0, 0, 1)>0.5)
     Y.append((0, 0, 0, 1))
-    X.append(forward(0, 0, 1, 0))
+    X.append(forward(0, 0, 1, 0)>0.5)
     Y.append((0, 0, 1, 0))
-    X.append(forward(0, 0, 1, 1))
+    X.append(forward(0, 0, 1, 1)>0.5)
     Y.append((0, 0, 1, 1))
-    X.append(forward(0, 1, 0, 0))
+    X.append(forward(0, 1, 0, 0)>0.5)
     Y.append((0, 1, 0, 0))
 
-    X.append(forward(0, 1, 0, 1))
+    X.append(forward(0, 1, 0, 1)>0.5)
     Y.append((0, 1, 0, 1))
-    X.append(forward(0, 1, 1, 0))
+    X.append(forward(0, 1, 1, 0)>0.5)
     Y.append((0, 1, 1, 0))
-    X.append(forward(0, 1, 1, 1))
+    X.append(forward(0, 1, 1, 1)>0.5)
     Y.append((0, 1, 1, 1))
-    X.append(forward(1, 0, 0, 0))
+    X.append(forward(1, 0, 0, 0)>0.5)
     Y.append((1, 0, 0, 0))
-    X.append(forward(1, 0, 0, 1))
+    X.append(forward(1, 0, 0, 1)>0.5)
     Y.append((1, 0, 0, 1))
 
-    X.append(forward(1, 0, 1, 0))
+    X.append(forward(1, 0, 1, 0)>0.5)
     Y.append((1, 0, 1, 0))
-    X.append(forward(1, 0, 1, 1))
+    X.append(forward(1, 0, 1, 1)>0.5)
     Y.append((1, 0, 1, 1))
-    X.append(forward(1, 1, 0, 0))
+    X.append(forward(1, 1, 0, 0)>0.5)
     Y.append((1, 1, 0, 0))
-    X.append(forward(1, 1, 0, 1))
+    X.append(forward(1, 1, 0, 1)>0.5)
     Y.append((1, 1, 0, 1))
-    X.append(forward(1, 1, 1, 0))
+    X.append(forward(1, 1, 1, 0)>0.5)
     Y.append((1, 1, 1, 0))
 
-    X.append(forward(1, 1, 1, 1))
+    X.append(forward(1, 1, 1, 1)>0.5)
     Y.append((1, 1, 1, 1))
 
     print(X)
@@ -158,7 +152,7 @@ def entrenando():
     for tubla in Y:
         print(f"{tubla} {model.predict([tubla]) >0.5}")
 
-    plt.xlabel("Entrenamiento")
+    plt.xlabel("Ciclos entrenamiento")
     plt.ylabel("Error")
     plt.plot(historial.history["loss"])
     plt.show()
