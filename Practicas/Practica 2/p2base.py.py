@@ -3,8 +3,8 @@ from tensorflow import keras
 from tensorflow.keras import layers
 import matplotlib.pyplot as plt
 
-X =[]
 Y =[]
+X =[]
 
 def decision(x,w,peso):
     resultado = 0
@@ -92,46 +92,46 @@ def forward(a,b,c,d):
     return decision(x, w, b)
 
 def prueba():
-    global X
     global Y
-    X.append(forward(0, 0, 0, 0)>0.5)
-    Y.append((0, 0, 0, 0))
-    X.append(forward(0, 0, 0, 1)>0.5)
-    Y.append((0, 0, 0, 1))
-    X.append(forward(0, 0, 1, 0)>0.5)
-    Y.append((0, 0, 1, 0))
-    X.append(forward(0, 0, 1, 1)>0.5)
-    Y.append((0, 0, 1, 1))
-    X.append(forward(0, 1, 0, 0)>0.5)
-    Y.append((0, 1, 0, 0))
+    global X
+    Y.append(forward(0, 0, 0, 0) > 0.5)
+    X.append((0, 0, 0, 0))
+    Y.append(forward(0, 0, 0, 1) > 0.5)
+    X.append((0, 0, 0, 1))
+    Y.append(forward(0, 0, 1, 0) > 0.5)
+    X.append((0, 0, 1, 0))
+    Y.append(forward(0, 0, 1, 1) > 0.5)
+    X.append((0, 0, 1, 1))
+    Y.append(forward(0, 1, 0, 0) > 0.5)
+    X.append((0, 1, 0, 0))
 
-    X.append(forward(0, 1, 0, 1)>0.5)
-    Y.append((0, 1, 0, 1))
-    X.append(forward(0, 1, 1, 0)>0.5)
-    Y.append((0, 1, 1, 0))
-    X.append(forward(0, 1, 1, 1)>0.5)
-    Y.append((0, 1, 1, 1))
-    X.append(forward(1, 0, 0, 0)>0.5)
-    Y.append((1, 0, 0, 0))
-    X.append(forward(1, 0, 0, 1)>0.5)
-    Y.append((1, 0, 0, 1))
+    Y.append(forward(0, 1, 0, 1) > 0.5)
+    X.append((0, 1, 0, 1))
+    Y.append(forward(0, 1, 1, 0) > 0.5)
+    X.append((0, 1, 1, 0))
+    Y.append(forward(0, 1, 1, 1) > 0.5)
+    X.append((0, 1, 1, 1))
+    Y.append(forward(1, 0, 0, 0) > 0.5)
+    X.append((1, 0, 0, 0))
+    Y.append(forward(1, 0, 0, 1) > 0.5)
+    X.append((1, 0, 0, 1))
 
-    X.append(forward(1, 0, 1, 0)>0.5)
-    Y.append((1, 0, 1, 0))
-    X.append(forward(1, 0, 1, 1)>0.5)
-    Y.append((1, 0, 1, 1))
-    X.append(forward(1, 1, 0, 0)>0.5)
-    Y.append((1, 1, 0, 0))
-    X.append(forward(1, 1, 0, 1)>0.5)
-    Y.append((1, 1, 0, 1))
-    X.append(forward(1, 1, 1, 0)>0.5)
-    Y.append((1, 1, 1, 0))
+    Y.append(forward(1, 0, 1, 0) > 0.5)
+    X.append((1, 0, 1, 0))
+    Y.append(forward(1, 0, 1, 1) > 0.5)
+    X.append((1, 0, 1, 1))
+    Y.append(forward(1, 1, 0, 0) > 0.5)
+    X.append((1, 1, 0, 0))
+    Y.append(forward(1, 1, 0, 1) > 0.5)
+    X.append((1, 1, 0, 1))
+    Y.append(forward(1, 1, 1, 0) > 0.5)
+    X.append((1, 1, 1, 0))
 
-    X.append(forward(1, 1, 1, 1)>0.5)
-    Y.append((1, 1, 1, 1))
+    Y.append(forward(1, 1, 1, 1) > 0.5)
+    X.append((1, 1, 1, 1))
 
-    print(X)
     print(Y)
+    print(X)
 
 def entrenando():
     model = keras.Sequential(
@@ -146,13 +146,13 @@ def entrenando():
 
     model.compile(loss="mean_squared_error", optimizer="adam")
 
-    historial = model.fit(Y, X, epochs=2000,batch_size=16, verbose=False)
+    historial = model.fit(X, Y, epochs=2000, batch_size=16, verbose=False)
 
     #model.predict([Y[0]])
-    for tubla in Y:
+    for tubla in X:
         print(f"{tubla} {model.predict([tubla]) >0.5}")
 
-    plt.xlabel("Ciclos entrenamiento")
+    plt.xlabel("Epocas")
     plt.ylabel("Error")
     plt.plot(historial.history["loss"])
     plt.show()
