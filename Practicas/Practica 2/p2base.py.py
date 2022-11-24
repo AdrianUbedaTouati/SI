@@ -17,46 +17,6 @@ def decision(x,w,peso):
 
     return funcion
     
-def main():
-    #AND
-    #print("AND")
-    x = [1,1]
-    w = [1,1]
-    b = -2
-    #print(decision(x,w,b))
-    
-    #OR
-    #print("OR")
-    x = [1,1]
-    w = [1,1]
-    b = -1
-    #print(decision(x,w,b))
-    
-    #XOR
-    #print("XOR")
-    x = [1,1]
-    w = [1,1]
-    b = -1
-    primerNodo = decision(x,w,b)
-    #print("Primer nodo " + str(primerNodo))
-    
-    w = [2,2]
-    b = -4
-    segundoNodo = decision(x,w,b)
-    #print("Segundo nodo " + str(segundoNodo))
-    
-    x = [primerNodo,segundoNodo]
-    w = [1,-1]
-    b = -0.3
-    resultado = decision(x,w,b)
-    #print("Tercer nodo " + str(resultado))
-
-    prueba()
-
-    entrenando()
-
-    
-    
 def forward(a,b,c,d):
 
     x = [a,b,c,d]
@@ -148,7 +108,6 @@ def entrenando():
 
     historial = model.fit(X, Y, epochs=2000, batch_size=16, verbose=False)
 
-    #model.predict([Y[0]])
     for tubla in X:
         print(f"{tubla} {model.predict([tubla]) >0.5}")
 
@@ -156,6 +115,10 @@ def entrenando():
     plt.ylabel("Error")
     plt.plot(historial.history["loss"])
     plt.show()
+
+def main():
+    prueba()
+    entrenando()
 
 if __name__=="__main__":
     main()
