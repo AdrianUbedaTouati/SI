@@ -90,6 +90,9 @@ def prueba():
     Y.append(forward(1, 1, 1, 1) > 0.5)
     X.append((1, 1, 1, 1))
 
+    print(Y)
+    print(X)
+
 def entrenando():
     model = keras.Sequential(
         [
